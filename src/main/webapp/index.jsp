@@ -5,9 +5,17 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1><%= "Witaj w naszym sklepie!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="basket-servlet">Mój koszyk</a>
+<br><br>
+<a href="apple-servlet">Dział z jabłkami</a>
+<br>
+<a href="carrot-servlet">Dział w marchewkami</a>
+<br>
+<a href="potato-servlet">Dział z ziemniakami</a>
+
+
 </body>
 </html>

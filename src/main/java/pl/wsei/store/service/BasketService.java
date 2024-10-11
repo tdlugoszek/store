@@ -1,23 +1,42 @@
 package pl.wsei.store.service;
 
-import jakarta.mail.FetchProfile;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import pl.wsei.store.model.Bucket;
+import pl.wsei.store.model.Basket;
 
-public class BucketService {
+import java.util.List;
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistance_unit");
-    private EntityManager em = emf.createEntityManager();
+public class BasketService {
+
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 
     public void buyItem(String item) {
-        em.getTransaction().begin();
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
 
-        Bucket bucket = new Bucket();
-        bucket.setItem(item);
-        em.persist(bucket);
+            Basket basket = new Basket();
+            basket.setItem(item);
+            em.persist(basket);
 
-        em.getTransaction().commit();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Basket> getAllItems() {
+        EntityManager em = emf.createEntityManager();
+        List<Basket> items;
+        try {
+            items = em.createQuery("SELECT b FROM Basket b", Basket.class).getResultList();
+        } finally {
+            em.close();
+        }
+        return items;
     }
 }

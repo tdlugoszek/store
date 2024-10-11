@@ -3,8 +3,8 @@ package pl.wsei.store.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Bucket")
-public class Bucket {
+@Table(name = "basket")
+public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

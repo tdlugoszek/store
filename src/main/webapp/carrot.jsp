@@ -1,16 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: lukaszciuraj
-  Date: 11/10/2024
-  Time: 00:09
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Marchewki</title>
+</head>
+<body>
+
+<h1>Oto dział w marchewkami:</h1>
+
+<form action="${pageContext.request.contextPath}/add-to-basket" method="post">
+    <input type="hidden" name="item" value="marchewka">
+    <input type="submit" value="Kup marchewke">
+</form>
+
+</body>
 </html>
