@@ -11,6 +11,8 @@
     <input type="hidden" name="item" value="ziemniak">
     <input type="submit" value="Kup ziemniaka">
 </form>
-
+<form action="${pageContext.request.contextPath}/index.jsp" method="get">
+    <input type="submit" value="Rozmyslilem sie">
+</form>
 </body>
 </html>
