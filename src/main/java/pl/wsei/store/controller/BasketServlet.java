@@ -36,6 +36,12 @@ public class BasketServlet extends HttpServlet {
                 out.println("</tr>");
             }
             out.println("</table>");
+            out.println("<br><br>");
+
+//            out.println("<form action=\"${pageContext.request.contextPath}/empty-basket\" method=\"post\">");
+            out.println("<form action='" + request.getContextPath() + "/empty-basket' method='post'>");
+            out.println("<input type='submit' value='Wyczysc koszyk'>");
+            out.println("</form>");
         } else {
             out.println("<p>Koszyk jest pusty.</p>");
         }
