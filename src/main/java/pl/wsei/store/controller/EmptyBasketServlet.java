@@ -19,7 +19,6 @@ public class EmptyBasketServlet extends HttpServlet {
 
         try {
             basketService.emptyBasket();
-
             response.sendRedirect(request.getContextPath() + "/basket-servlet");
         } catch (Exception e) {
             throw new ServletException("Error processing request", e);

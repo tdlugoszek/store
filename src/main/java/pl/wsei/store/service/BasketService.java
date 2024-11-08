@@ -13,29 +13,56 @@ public class BasketService {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 
+    public void sellItem(String item, int quantity) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
 
+            Basket foundBasket;
+            try {
+                foundBasket = em.createQuery("SELECT b FROM Basket b WHERE b.item = :item", Basket.class)
+                        .setParameter("item", item)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                throw new IllegalArgumentException("Item not found in the basket.");
+            }
+
+
+            int newQuantity = foundBasket.getQuantity() - quantity;
+            if (newQuantity > 0) {
+                foundBasket.setQuantity(newQuantity);
+                em.merge(foundBasket);
+            } else {
+                em.remove(foundBasket);
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
 
 
     public void buyItem(String item, int quantity) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-
             Basket foundBasket = null;
             try {
                 foundBasket = em.createQuery("SELECT b FROM Basket b WHERE b.item = :item", Basket.class)
                         .setParameter("item", item)
                         .getSingleResult();
             } catch (NoResultException e) {
-                // No existing basket found; proceed with creating a new one
+
             }
 
             if (foundBasket != null) {
-                // Update quantity of existing basket item
                 foundBasket.setQuantity(foundBasket.getQuantity() + quantity);
                 em.merge(foundBasket);
             } else {
-                // No existing item, so create a new one
                 Basket newBasket = new Basket();
                 newBasket.setItem(item);
                 newBasket.setQuantity(quantity);

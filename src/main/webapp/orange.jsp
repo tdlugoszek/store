@@ -12,6 +12,11 @@
     <input type="submit" value="Kup pomarancze">
     <input type="number" name="quantity">
 </form>
+<form action="${pageContext.request.contextPath}/sell-from-basket" method="post">
+    <input type="hidden" name="item" value="pomarancza">
+    <input type="submit" value="Sprzedaj pomarancze">
+    <input type="number" name="quantity">
+</form>
 <form action="${pageContext.request.contextPath}/index.jsp" method="get">
     <input type="submit" value="Rozmyslilem sie">
 </form>

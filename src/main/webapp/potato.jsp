@@ -12,6 +12,11 @@
     <input type="submit" value="Kup ziemniaka">
     <input type="number" name="quantity">
 </form>
+<form action="${pageContext.request.contextPath}/sell-from-basket" method="post">
+    <input type="hidden" name="item" value="ziemniak">
+    <input type="submit" value="Sprzedaj ziemniaka">
+    <input type="number" name="quantity">
+</form>
 <form action="${pageContext.request.contextPath}/index.jsp" method="get">
     <input type="submit" value="Rozmyslilem sie">
 </form>
